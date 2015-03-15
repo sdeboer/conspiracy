@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Potential ENV vars, defaults are set in card_server.app.src
+# SESSION_COOKIE (c_session)
+# PORT (10100)
+# CARD_CLIENT_DOMAIN (conspiracy.psiinteractive.com)
+
+erl \
+	-pa ebin \
+	-pa deps/*/ebin \
+	-config app \
+	-s card_server

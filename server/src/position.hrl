@@ -1,0 +1,1 @@
+-record(position, {x, y, z}).

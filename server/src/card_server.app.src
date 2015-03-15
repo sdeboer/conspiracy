@@ -1,0 +1,17 @@
+{application, card_server,
+	[
+		{description, "Managing the card state"},
+		{vsn, git},
+		{registered, [card_server_sup]},
+		{applications, [
+				kernel, stdlib, goldrush,
+				lager, syntax_tools, cowboy
+				]},
+		{mod, { card_server_app, []}},
+		{env, [
+				{http_port, 10100},
+				{session_cookie, <<"c_session">>},
+				{card_client_domain, <<"conspiracy.psiinteractive.com">>}
+				]}
+		]}.
+% vim: set filetype=erlang:

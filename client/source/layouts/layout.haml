@@ -1,0 +1,43 @@
+%html(ng-app="ChaseApp")
+  %head
+    %meta(charset="utf-8")
+    %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+
+    %title= current_page.data.title || "Play Chase"
+
+    = stylesheet_link_tag "normalize", "all"
+
+  %body{class: page_classes}
+    = yield
+
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"
+
+    -#:javascript
+      console.log("BLAG!");
+      var loadFirstEl;
+      function loadLibraryScript(url) {
+        var js;
+
+        loadFirstEl || (loadFirstEl = document.getElementsByTagName('head')[0]);
+
+        js = document.createElement('script');
+
+        js.type = 'text/javascript';
+        js.src = '/libs/' + url;
+
+        console.log("Should be ", js.src);
+        loadFirstEl.appendChild(js);
+      }
+
+      if(typeof angular == 'undefined') loadLibraryScript('angular.js')
+
+    -#:javascript
+      try {
+        angular.module("ngResource")
+      } catch(e) {
+        loadLibraryScript('angular-resource.js')
+      }
+
+    = javascript_include_tag "all"

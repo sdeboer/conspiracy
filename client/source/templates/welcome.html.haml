@@ -1,0 +1,16 @@
+.content(ng-controller="ProfileController")
+  .profile
+    %h2 Game Profile
+
+    %form(name='profileForm' id='profileForm')
+      .control.handle
+        %span.label Handle
+        %span.data
+          %input(ng-model="profile.handle" ng-minlength="4" ng-maxlength="14" ng-required=true ng-trim="true")
+      .control.location
+        %span.label Location
+        %span.data
+
+      .next
+        .button
+          %a(href="" ng-click="pickGame()") Pick a game

@@ -1,0 +1,26 @@
+.content(ng-controller="GameListController")
+  .game
+    %h2 Find a Game
+
+    %form(name='gameList' id='gameList' ng-submit='createGame()')
+      %fieldset
+        .typeRadio(ng-repeat="type in types")
+          %input(type="radio" id="game_type_{{type.id}}" ng-value="type.id" ng-model="$parent.currentType")
+          %label(for="game_type_{{type.id}}") {{type.name}}
+
+      %input(type='submit' value='Create')
+
+    %ul#listGames
+      %li(ng-repeat="game in games" ng-class="{{ game.mine ? 'mine' : '' }}")
+        %span.name {{ game.name }}
+        %span.started {{ game.started_at }}
+        %span.count {{ game.count }}
+
+    %form(name='searchGames' id='searchGames')
+      .control.type
+
+      .control.state
+
+      .next
+        .button
+          %a(href="/play") Join Game

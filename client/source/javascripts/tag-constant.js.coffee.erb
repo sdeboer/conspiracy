@@ -1,0 +1,10 @@
+ChaseApp = angular.module 'ChaseApp'
+
+<% if development? %>
+host = 'localhost'
+<% else %>
+host = 'tag.psiinteractive.com'
+<% end %>
+
+ChaseApp.constant 'TagUrl', "http://#{host}\\:10100"
+ChaseApp.constant 'WebsocketUrl', "ws://#{host}:10100/play/"

@@ -1,0 +1,10 @@
+.content(ng-controller="ProfileController")
+  .profile
+    %ul
+      %li(ng-repeat="field in fields")
+        %span.strong {{ field.name }}:
+        {{ field.value }}
+
+  %div(ng-switch="filled")
+    .exists(ng-switch-when="yep") Filled
+    .new(ng-switch-default) Empty

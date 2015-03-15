@@ -1,0 +1,26 @@
+.content(ng-controller="GameDisplayController")
+  .play
+    %h2 {{label}}
+
+    %canvas#playMap(resize=true)
+
+  .geo
+    %button(ng-click="debug = !debug") Toggle Debugging
+    .debug(ng-show="debug")
+      %div(ng-hide="supportsGeo")
+        Sorry.  You cannot play.  You have no geolocation capability.
+      %div(ng-show="supportsGeo")
+        .current
+          %span.lat(ng-bind="current.latitude") **
+          %span.long(ng-bind="current.longitude") **
+          %span.heading(ng-bind="current.heading") **
+          %span.speed(ng-bind="current.speed") **
+          \(
+          %span.acc(ng-bind="current.accuracy") **
+          \)
+
+        .origin
+          %span.lat(ng-bind="origin.lat") **
+          %span.long(ng-bind="origin.long") **
+
+  %script(type="text/paperscript" src="javascripts/game_play.js" canvas="play")
