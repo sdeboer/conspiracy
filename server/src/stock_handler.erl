@@ -112,7 +112,7 @@ alter_stock(Req, S) ->
 
 to_json(Req, list) ->
 	J = stock:list(),
-	Json = jiffy:encode({ J }),
+	Json = jiffy:encode(J),
 	json_handler:return_json(Json, Req, list);
 
 to_json(Req, S) ->

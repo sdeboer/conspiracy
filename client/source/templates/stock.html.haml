@@ -1,0 +1,67 @@
+.content(ng-controller="StockController")
+  .list(ng-repeat="v in items")
+    .item(data-stock-id="{{v.id}}")
+      .name {{v.name}}
+
+  %form.add(name="stockForm" id="stockForm")
+    %table
+      %tbody
+        %tr.control.name
+          %td.label Name
+          %td.data
+            %input(ng-model="newStock.name" ng-required=true ng-trim=true)
+        %tr.control.description
+          %td.label Description
+          %td.data
+            %input(ng-model="newStock.description" ng-trim=true)
+        %tr.control.type
+          %td.label Type
+          %td.data
+            %select(ng-model="newStock.type" ng-required=true ng-options="o.name for o in types" ng-required=true)
+        %tr.control.cost
+          %td.label Cost
+          %td.data
+            %input(ng-model="newStock.cost" type="number" ng-trim=true)
+        %tr.control.influenceGenerated
+          %td.label Influence Generated
+          %td.data
+            %input(ng-model="newStock.influenceGenerated" type="number" ng-trim=true)
+        %tr.control.controlGenerated
+          %td.label Control Generated
+          %td.data
+            %input(ng-model="newStock.controlGenerated" type="number" ng-trim=true)
+        %tr.control.nextGeneration
+          %td.label Next Gen.
+          %td.data
+            %input(ng-model="newStock.nextGeneration" ng-trim=true)
+        %tr.control.prevGeneration
+          %td.label Previous Gen.
+          %td.data
+            %input(ng-model="newStock.prevGeneration" ng-trim=true)
+        %tr.control.art
+          %td.label Art (url)
+          %td.data
+            %input(ng-model="newStock.art" type="url" ng-trim=true)
+        %tr.control.theme
+          %td.label Theme
+          %td.data
+            %input(ng-model="newStock.theme" ng-trim=true)
+        %tr.control.story
+          %td.label Story
+          %td.data
+            %input(ng-model="newStock.story" ng-trim=true)
+        %tr.control.span
+          %td.label Span
+          %td.data
+            %input(ng-model="newStock.span" type="number" min=0 ng-required ng-trim=true)
+        %tr.control.requiredSpheres
+          %td.label Required Spheres
+          %td.data
+            %input(ng-model="newStock.requiredSpheres" ng-trim=true)
+        %tr.control.forbiddenSpheres
+          %td.label Forbidden Spheres
+          %td.data
+            %input(ng-model="newStock.forbiddenSpheres" ng-trim=true)
+        %tr.control.specials
+        %tr.control.powers
+        %tr.control.affiliations

@@ -1,0 +1,13 @@
+App = angular.module 'Conspiracy'
+
+<% if development? %>
+host = 'localhost'
+port = 10100
+<% else %>
+host = 'master.psiinteractive.com'
+port = 80
+<% end %>
+
+# Should do something about protocol here...
+App.constant 'MasterUrl', "http://#{host}\\:#{port}"
+App.constant 'WebsocketUrl', "ws://#{host}:#{port}/play/"

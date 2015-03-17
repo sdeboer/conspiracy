@@ -1,5 +1,6 @@
 -record(stock, {
 					id,
+					active,
 					name,
 					description,
 					type,

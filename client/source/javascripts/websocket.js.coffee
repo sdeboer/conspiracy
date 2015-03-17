@@ -1,4 +1,4 @@
-ChaseApp = angular.module 'ChaseApp'
+App = angular.module 'Conspiracy'
 
 class SocketContainer
 	constructor: (@$q, @$rootScope, @host)->
@@ -64,4 +64,4 @@ class SocketContainer
 
 		@
 
-ChaseApp.service 'WebSocket', ['$q', '$rootScope', 'WebsocketUrl', SocketContainer]
+App.service 'WebSocket', ['$q', '$rootScope', 'WebsocketUrl', SocketContainer]

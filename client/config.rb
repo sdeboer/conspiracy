@@ -1,15 +1,7 @@
-###
-# Compass
-###
-
 # Change Compass configuration
 # compass_config do |config|
 #   config.output_style = :compact
 # end
-
-###
-# Page options, layouts, aliases and proxies
-###
 
 # Per-page layout changes:
 #
@@ -75,6 +67,6 @@ configure :build do
 end
 
 activate :s3_sync do |s3_sync|
-  s3_sync.bucket                     = 'chase.psiinteractive.com' # The name of the S3 bucket you are targetting. This is globally unique.
+  s3_sync.bucket                     = 'conspiracy.psiinteractive.com' # The name of the S3 bucket you are targetting. This is globally unique.
   s3_sync.region                     = 'us-east-1'     # The AWS region for your bucket.
 end
