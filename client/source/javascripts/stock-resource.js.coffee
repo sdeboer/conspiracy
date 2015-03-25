@@ -11,7 +11,7 @@ stockActions =
 
 Stock = ($resource, host)->
 	$resource host + '/stock/:stock_id',
-		null,
+		{stock_id: '@id'},
 		stockActions
 
 angular.module('Conspiracy').factory 'StockResource', ['$resource', 'MasterUrl', Stock]

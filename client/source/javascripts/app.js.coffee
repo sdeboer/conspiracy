@@ -6,7 +6,7 @@ app = (router, location, http)->
 	router.when('/welcome/',
 		templateUrl: '/templates/welcome.html')
 
-	router.when('/stock/',
+	router.when('/stock/:stock_id?',
 		templateUrl: '/templates/stock.html')
 
 	router.when('/layout/',

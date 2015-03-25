@@ -11,7 +11,8 @@
 % Model API
 -export([
 	save/2, 
-	load/1
+	load/1,
+	dumb_load/1
 	]).
 
 % Key API
@@ -53,7 +54,7 @@ mod_name()->
 	global:whereis_name(?MODULE).
 
 % Keys
-generate() -> uuid:to_string(uuid:uuid4()).
+generate() -> list_to_binary(uuid:to_string(uuid:uuid4())).
 
 gen() -> generate().
 
@@ -68,6 +69,9 @@ save(Key, Value) ->
 	gen_server:call(mod_name(),
 		{save_value, Key, Value}
 		).
+
+dumb_load(Key) ->
+	gen_server:call(mod_name(), {get_value, Key}).
 
 load(Key) ->
 	case gen_server:call(mod_name(), {get_value, Key}) of
