@@ -1,33 +1,20 @@
 -module(json_handler).
 
 -export([
-				 return_json/3,
-				 encode_response/4,
-				 construct_response/3, construct_response/4
+				 return_json/2,
+				 construct_response/2
 				]).
 
-return_json(Json, Req, S) ->
+return_json(Json, Req) ->
 	case cowboy_req:qs_val(<<"jsonp">>, Req) of
 		{undefined, R2} -> 
-			{Json, R2, S};
+			{Json, R2};
 		{Fn, R2} ->
 			B = [Fn, <<"(">>, Json, <<");">>],
-			{B, R2, S}
+			{B, R2}
 	end.
 
-%encode_response(Resp, Req, State) -> construct_response(jiffy:encode(Resp), Req, State).
-
-encode_response(Resp, Req, Code, State) ->
-	construct_response(jiffy:encode(Resp), Req, Code, State).
-
-construct_response(Json, Req, State) ->
-	construct_response(Json, Req, State, 200).
-
-construct_response(Json, Req, State, Code) ->
-	{Body, R1, S} = return_json(Json, Req, State),
-	{ok, R2} = cowboy_req:reply(
-							 Code,
-							 [{<<"content-type">>, <<"application/json">>}],
-							 Body,
-							 R1),
-	{true, R2, S}.
+construct_response(Json, Req) ->
+	{Body, R1} = return_json(Json, Req),
+	R4 = cowboy_req:set_resp_body(Body, R1),
+	cowboy_req:set_resp_header(<<"content-type">>, <<"application/json">>, R4).

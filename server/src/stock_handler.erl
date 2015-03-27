@@ -81,7 +81,8 @@ alter_stock(Req, undefined) ->
 			Stock = stock:create(jiffy:decode(Body)),
 			Json = stock:to_json(Stock),
 			S = #state{stock_id = Stock#stock.id, stock = Stock},
-			json_handler:construct_response(Json, R2, S);
+			R3 = json_handler:construct_response(Json, R2),
+			{true, R3, S};
 
 		{error, Reason} ->
 			json_handler:encode_response({error, Reason}, Req, undefined, 400)
@@ -91,9 +92,9 @@ alter_stock(Req, S) ->
 	case cowboy_req:body(Req) of
 		{ok, Body, R2} ->
 			Stock = stock:update(S#state.stock, jiffy:decode(Body)),
-			Json = stock:to_json(Stock),
 			S2 = S#state{stock = Stock},
-			json_handler:construct_response(Json, R2, S2);
+			R3 = json_handler:construct_response(stock:to_json(Stock), R2),
+			{true, R3, S2};
 
 		X ->
 			json_handler:encode_response(X, Req, S, 400)
@@ -102,9 +103,11 @@ alter_stock(Req, S) ->
 to_json(Req, list) ->
 	J = [ stock:to_proplist(S) || S <- stock:list() ],
 	Json = jiffy:encode(J),
-	json_handler:return_json(Json, Req, list);
+	{B, R2} = json_handler:return_json(Json, Req),
+	{B, R2, list};
 
 to_json(Req, S) ->
 	Json = stock:to_json(S#state.stock),
-	json_handler:return_json(Json, Req, S).
+	{B, R2} = json_handler:return_json(Json, Req),
+	{B, R2, S}.
 
